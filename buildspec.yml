@@ -5,8 +5,13 @@ phases:
     runtime-versions:
       python: "3.8"
     commands:
-      - pip install terraform
+      # Ensure Terraform is installed in the build environment
+      - curl -o terraform.zip https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
+      - unzip terraform.zip
+      - mv terraform /usr/local/bin/
       - pip install openpolicyagent
+    finally:
+      - terraform --version
   build:
     commands:
       - terraform init
