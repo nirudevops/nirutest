@@ -9,9 +9,11 @@ phases:
       - curl -o terraform.zip https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
       - unzip terraform.zip
       - mv terraform /usr/local/bin/
-      - pip install openpolicyagent
+      - curl -L -o opa https://openpolicyagent.org/downloads/v1.3.0/opa_linux_amd64_static
+      - mv opa /usr/local/bin/
     finally:
       - terraform --version
+      - opa --version
   build:
     commands:
       - terraform init
