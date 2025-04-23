@@ -11,7 +11,7 @@ phases:
       - mv terraform /usr/local/bin/
       - curl -L -o opa https://openpolicyagent.org/downloads/v1.3.0/opa_linux_amd64_static
       - mv opa /usr/local/bin/
-      - chmod 755 ./usr/local/bin/opa
+      - chmod 755 /usr/local/bin/opa
     finally:
       - terraform --version
       - opa --version
