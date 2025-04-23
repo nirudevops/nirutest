@@ -6,7 +6,7 @@ phases:
       python: "3.8"
     commands:
       # Ensure Terraform is installed in the build environment
-      - curl -o terraform.zip https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
+      - curl -o terraform.zip https://releases.hashicorp.com/terraform/1.11.4/terraform_1.11.4_linux_amd64.zip
       - unzip terraform.zip
       - mv terraform /usr/local/bin/
       - curl -L -o opa https://openpolicyagent.org/downloads/v1.3.0/opa_linux_amd64_static
@@ -14,7 +14,7 @@ phases:
       - chmod 755 /usr/local/bin/opa
     finally:
       - terraform --version
-      - opa --version
+      - opa version
   build:
     commands:
       - terraform init
