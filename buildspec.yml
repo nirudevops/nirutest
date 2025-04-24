@@ -24,11 +24,10 @@ phases:
       - |
         # Evaluate the policy and capture the result
         result=$(opa eval -d policies/main.rego -i output.json -f json "data.example.deny_untagged_instances")
-        # Check if the result is not empty, indicating a policy violation
-        echo $result
-        if [ "$result" != "{}" ]; then
+        # Parse the result to check for policy violations
+        if echo "$result" | grep -q '"value": \[\]'; then
+          echo "No policy violations detected."
+        else
           echo "Policy violation detected: EC2 instances without tags."
           exit 1  # Fail the build
-        else
-          echo "No policy violations detected."
         fi
