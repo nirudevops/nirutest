@@ -19,4 +19,5 @@ phases:
     commands:
       - terraform init
       - terraform plan -out=tfplan
-      - opa eval -d policies/main.rego -i tfplan -f json --stdin
+      - terraform show -no-color -json tfplan > output.json
+      - opa eval -d policies/main.rego -i output.json -f json --stdin
