@@ -19,4 +19,4 @@ phases:
     commands:
       - terraform init
       - terraform plan -out=tfplan
-      - opa eval -d policies/main.rego -i tfplan -f json
+      - opa eval -d policies/main.rego -i tfplan -f json --query "data.example.deny_untagged_instances"
