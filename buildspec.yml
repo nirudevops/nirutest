@@ -18,5 +18,5 @@ phases:
   build:
     commands:
       - terraform init
-      - terraform plan -out=tfplan -var-file="terraform.tfvars"
+      - terraform plan -out=tfplan
       - opa eval -i policies/main.rego -d tfplan -f json
