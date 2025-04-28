@@ -26,7 +26,7 @@ phases:
         result=$(opa eval -d policies/main.rego -i output.json -f json "data.example.deny_untagged_instances")
         echo $result
         # Parse the result to check for policy violations
-        if echo "$result" | grep -q '"value": \[\]'; then
+        if echo "$result" | grep -q 'value: {}'; then
           echo "No policy violations detected."
         else
           echo "Policy violation detected: EC2 instances without tags."
