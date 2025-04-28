@@ -24,6 +24,7 @@ phases:
       - |
         # Evaluate the policy and capture the result
         result=$(opa eval -d policies/main.rego -i output.json -f json "data.example.deny_untagged_instances")
+        echo $result
         # Parse the result to check for policy violations
         if echo "$result" | grep -q '"value": \[\]'; then
           echo "No policy violations detected."
