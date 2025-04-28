@@ -31,4 +31,9 @@ phases:
         else
           echo "Policy violation detected: EC2 instances without tags."
           exit 1  # Fail the build
-        fi
+          fi
+  artifacts:
+    files:
+      - output.json
+    discard-paths: yes
+    base-directory: build_output
