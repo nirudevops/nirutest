@@ -20,11 +20,11 @@ phases:
       - mkdir -p build_output
       - terraform init
       - terraform plan -out=tfplan
-      - terraform show -no-color -json tfplan > output.json
-      - opa eval -d policies/main.rego -i output.json -f json "data.example.deny_untagged_instances"
+      - terraform show -no-color -json tfplan > build_output/output.json
+      - opa eval -d policies/main.rego -i build_output/output.json -f json "data.example.deny_untagged_instances"
       - |
         # Evaluate the policy and capture the result
-        result=$(opa eval -d policies/main.rego -i output.json -f json "data.example.deny_untagged_instances")
+        result=$(opa eval -d policies/main.rego -i build_output/output.json -f json "data.example.deny_untagged_instances")
         echo $result
         # Parse the result to check for policy violations
         if echo "$result" | grep -q '"value": {}'; then
